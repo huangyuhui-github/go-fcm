@@ -139,7 +139,6 @@ func (c *Client) SendWithRetryWithContext(ctx context.Context, msg *Message, ret
 // send sends a request.
 func (c *Client) send(ctx context.Context, data []byte) (*Response, error) {
 
-	fmt.Printf("%+v\n", string(data))
 	// create request
 	req, err := http.NewRequest("POST", c.endpoint, bytes.NewBuffer(data))
 	if err != nil {
@@ -171,7 +170,6 @@ func (c *Client) send(ctx context.Context, data []byte) (*Response, error) {
 			return nil, serverError(fmt.Sprintf("%d error: %s", resp.StatusCode, resp.Status))
 		}
 
-		fmt.Printf("%+v\n", resp.Body)
 		return nil, fmt.Errorf("%d error: %s", resp.StatusCode, resp.Status)
 	}
 
