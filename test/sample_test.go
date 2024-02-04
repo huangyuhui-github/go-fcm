@@ -1,7 +1,7 @@
 package test
 
 import (
-	"github.com/appleboy/go-fcm"
+	"github.com/huangyuhui-github/go-fcm"
 	"testing"
 )
 

@@ -1,4 +1,4 @@
-module github.com/appleboy/go-fcm
+module github.com/huangyuhui-github/go-fcm
 
 go 1.20
 
