@@ -1,20 +1,29 @@
 package test
 
 import (
+	"firebase.google.com/go/v4/messaging"
 	"github.com/huangyuhui-github/go-fcm"
 	"testing"
 )
 
 func TestSample(t *testing.T) {
 
-	msg := &fcm.Message{
-		Token: "cAy6n8YIRLKmhZF1x4e_D5:APA91bF1HakkzuIkJ4D_8nqqdoVX5Cg-o4jw37nUwHW6yVhrgni66NiiZbLIAN33h3CLcYY6Hq9erb40zcLAgzq0oEqQrQ_gSu7QutxqhjUwaSQY5GNYp_zOSc8Mejkb4MpzslzndY5D",
-		Data: map[string]interface{}{
-			"foo": "bar",
-		},
-		Notification: &fcm.Notification{
-			Title: "FCM title message .",
-			Body:  "FCM body message.",
+	messages := []*messaging.Message{
+		{
+			Notification: &messaging.Notification{
+				Title: "FCM Title",
+				Body:  "FCM Body",
+			},
+			Token: "cAy6n8YIRLKmhZF1x4e_D5:APA91bF1HakkzuIkJ4D_8nqqdoVX5Cg-o4jw37nUwHW6yVhrgni66NiiZbLIAN33h3CLcYY6Hq9erb40zcLAgzq0oEqQrQ_gSu7QutxqhjUwaSQY5GNYp_zOSc8Mejkb4MpzslzndY5D",
+			Android: &messaging.AndroidConfig{
+				Notification: &messaging.AndroidNotification{
+					DefaultVibrateTimings: true,
+				},
+			},
+
+			Data: map[string]string{
+				"message": "这是透传消息",
+			},
 		},
 	}
 
@@ -24,10 +33,10 @@ func TestSample(t *testing.T) {
 	}
 
 	// Send the message and receive the response without retries.
-	response, err := client.Send(msg)
+	resp, err := client.Send(messages)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	t.Logf("%#v\n", response)
+	t.Logf("%+v\n", resp.Responses)
 }
