@@ -72,5 +72,5 @@ func (c *Client) Send(messages []*messaging.Message) (*messaging.BatchResponse, 
 // send sends a request.
 func (c *Client) send(ctx context.Context, messages []*messaging.Message) (*messaging.BatchResponse, error) {
 
-	return c.firebaseClient.SendAll(ctx, messages)
+	return c.firebaseClient.SendEach(ctx, messages)
 }
